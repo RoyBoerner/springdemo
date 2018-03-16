@@ -1,0 +1,86 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Spring Boot Demo</title>
+    <link rel="stylesheet" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/starter.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Spring Boot Demo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<main role="main" class="container">
+    <div class="container">
+        <h1>Hello world from index.html</h1>
+        <p>This site demonstrates the static content serving capabilities.</p>
+        <p>Here are some links provided by this application.</p>
+        <ul>
+            <li><a href="/index-rs">/index-rs</a></li>
+            <li><a href="/jmstrigger">/jmstrigger</a></li>
+            <li><a href="/persons">/persons</a></li>
+            <li><a href="/persons?lastName=Boerner">/persons?lastName=Boerner</a></li>
+            <li><a href="/actuator">/actuator</a></li>
+            <li>
+                <button id="shutdownBtn" type="button" class="btn btn-danger btn-sm">/actuator/shutdown</button>
+            </li>
+        </ul>
+    </div>
+</main>
+
+<!-- Bootstrap core JavaScript -->
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/popper.js/popper.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#shutdownBtn').click(function() {
+            $.ajax({
+                url:'/actuator/shutdown',
+                type: 'POST',
+                contentType: 'application/json',
+                success: function() { alert('Backend is now down') }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
