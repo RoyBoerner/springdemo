@@ -13,7 +13,7 @@ public class JmsTriggerResource {
     @Autowired
     private JmsTemplate jmsTemplate;
 
-    @GetMapping("/jmstrigger")
+    @GetMapping("/jmsTrigger")
     public void triggerJms() {
         jmsTemplate.convertAndSend(ActiveMqConfig.QNAME, MyAppEvent.builder().message("hello world").build());
     }
