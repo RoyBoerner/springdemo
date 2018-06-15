@@ -1,5 +1,6 @@
 package de.rboerner.springdemo.timer;
 
+import io.micrometer.core.instrument.Metrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +19,16 @@ public class ScheduledTasks {
     private String appName;
 
     @Scheduled(initialDelay = 15000, fixedDelay = 5000)
-    public void doSomeWork() throws InterruptedException {
+    public void doSomeWork() {
         logger.info("run task: {}", appName);
-        TimeUnit.SECONDS.sleep(10);
+        http://localhost:8080/actuator/metrics/scheduled.tasks.somework?tag=outcome:success
+        Metrics.counter("scheduled.tasks.somework", "outcome", "success").increment();
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            logger.error("caught exception", e);
+            Metrics.counter("scheduled.tasks.somework", "outcome", "fail").increment();
+        }
     }
 
 }

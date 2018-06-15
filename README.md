@@ -15,6 +15,7 @@ This is my little playground application. It demonstrates the following features
     1. type save config
 1. Metrics & Monitoring via Actuator
     1. including an own health indicator
+    1. including own metric (counter)
     1. app info (Git commit id)
 1. JPA, using
     1. an opinionated in-memory DB H2 setup 
